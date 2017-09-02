@@ -60,7 +60,7 @@ void replace_7_0(JNIEnv* env, jobject src, jobject dest) {
 	reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_ ^=
 			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_;
 	reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^=
-			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ -1;
+			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ ;
 	smeth->declaring_class_ ^= dmeth->declaring_class_;
 	smeth->access_flags_ ^= dmeth->access_flags_  | 0x0001;
 	smeth->dex_code_item_offset_ ^= dmeth->dex_code_item_offset_;
@@ -72,7 +72,7 @@ void replace_7_0(JNIEnv* env, jobject src, jobject dest) {
 	reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_ ^=
 			reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_;
 	reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ ^=
-			reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ -1;
+			reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ;
 	dmeth->declaring_class_ ^= smeth->declaring_class_;
 	dmeth->access_flags_ ^= smeth->access_flags_  | 0x0001;
 	dmeth->dex_code_item_offset_ ^= smeth->dex_code_item_offset_;
@@ -83,7 +83,7 @@ void replace_7_0(JNIEnv* env, jobject src, jobject dest) {
 	reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_ ^=
 			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_;
 	reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^=
-			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ -1;
+			reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ ;
 	smeth->declaring_class_ ^= dmeth->declaring_class_;
 	smeth->access_flags_ ^= dmeth->access_flags_  | 0x0001;
 	smeth->dex_code_item_offset_ ^= dmeth->dex_code_item_offset_;

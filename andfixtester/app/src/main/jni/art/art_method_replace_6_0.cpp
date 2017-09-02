@@ -74,7 +74,8 @@ void replace_6_0(JNIEnv* env, jobject src, jobject dest) {
             reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->class_loader_; //for plugin classloader
     reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_ ^=
             reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_;
-    reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^= reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_-1;
+    reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^=
+            reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_;
     smeth->declaring_class_ ^= dmeth->declaring_class_;
     smeth->dex_cache_resolved_methods_ ^= dmeth->dex_cache_resolved_methods_;
     smeth->dex_cache_resolved_types_ ^= dmeth->dex_cache_resolved_types_;
@@ -87,7 +88,8 @@ void replace_6_0(JNIEnv* env, jobject src, jobject dest) {
             reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->class_loader_; //for plugin classloader
     reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_ ^=
             reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_;
-    reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ ^= reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_-1;
+    reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_ ^=
+            reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_;
     dmeth->declaring_class_ ^= smeth->declaring_class_;
     dmeth->dex_cache_resolved_methods_ ^= smeth->dex_cache_resolved_methods_;
     dmeth->dex_cache_resolved_types_ ^= smeth->dex_cache_resolved_types_;
@@ -100,7 +102,8 @@ void replace_6_0(JNIEnv* env, jobject src, jobject dest) {
             reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->class_loader_; //for plugin classloader
     reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->clinit_thread_id_ ^=
             reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->clinit_thread_id_;
-    reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^= reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_-1;
+    reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->status_ ^=
+            reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->status_;
     smeth->declaring_class_ ^= dmeth->declaring_class_;
     smeth->dex_cache_resolved_methods_ ^= dmeth->dex_cache_resolved_methods_;
     smeth->dex_cache_resolved_types_ ^= dmeth->dex_cache_resolved_types_;

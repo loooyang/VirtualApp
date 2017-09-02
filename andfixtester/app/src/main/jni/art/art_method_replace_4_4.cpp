@@ -50,16 +50,15 @@ void replace_4_4(JNIEnv* env, jobject src, jobject dest) {
 	art::mirror::ArtMethod* dmeth =
 			(art::mirror::ArtMethod*) env->FromReflectedMethod(dest);
 
+	dmeth->declaring_class_->class_loader_ =
+			smeth->declaring_class_->class_loader_; //for plugin classloader
+	dmeth->declaring_class_->clinit_thread_id_ =
+			smeth->declaring_class_->clinit_thread_id_;
+	dmeth->declaring_class_->status_ = smeth->declaring_class_->status_-1;
 	//for reflection invoke
 	reinterpret_cast<art::mirror::Class*>(dmeth->declaring_class_)->super_class_ = 0;
-    reinterpret_cast<art::mirror::Class*>(smeth->declaring_class_)->super_class_ = 0;
 
-    dmeth->declaring_class_->class_loader_ =
-            smeth->declaring_class_->class_loader_; //for plugin classloader
-    dmeth->declaring_class_->clinit_thread_id_ =
-            smeth->declaring_class_->clinit_thread_id_;
-    dmeth->declaring_class_->status_ = smeth->declaring_class_->status_;
-    smeth->declaring_class_ = dmeth->declaring_class_;
+	smeth->declaring_class_ = dmeth->declaring_class_;
     smeth->dex_cache_initialized_static_storage_ = dmeth->dex_cache_initialized_static_storage_;
     smeth->access_flags_ = dmeth->access_flags_  | 0x0001;
     smeth->dex_cache_resolved_types_ = dmeth->dex_cache_resolved_types_;
@@ -75,60 +74,11 @@ void replace_4_4(JNIEnv* env, jobject src, jobject dest) {
     smeth->frame_size_in_bytes_ = dmeth->frame_size_in_bytes_;
     smeth->native_method_ = dmeth->native_method_;
     smeth->vmap_table_ = dmeth->vmap_table_;
+
     smeth->entry_point_from_compiled_code_ = dmeth->entry_point_from_compiled_code_;
+
     smeth->entry_point_from_interpreter_ = dmeth->entry_point_from_interpreter_;
-    smeth->method_index_ = dmeth->method_index_;
 
-
-    smeth->declaring_class_->class_loader_ =
-            dmeth->declaring_class_->class_loader_; //for plugin classloader
-    smeth->declaring_class_->clinit_thread_id_ =
-            dmeth->declaring_class_->clinit_thread_id_;
-    smeth->declaring_class_->status_ = dmeth->declaring_class_->status_;
-    dmeth->declaring_class_ = smeth->declaring_class_;
-    dmeth->dex_cache_initialized_static_storage_ = smeth->dex_cache_initialized_static_storage_;
-    dmeth->access_flags_ = smeth->access_flags_  | 0x0001;
-    dmeth->dex_cache_resolved_types_ = smeth->dex_cache_resolved_types_;
-    dmeth->dex_cache_resolved_methods_ = smeth->dex_cache_resolved_methods_;
-    dmeth->dex_cache_strings_ = smeth->dex_cache_strings_;
-    dmeth->code_item_offset_ = smeth->code_item_offset_;
-    dmeth->core_spill_mask_ = smeth->core_spill_mask_;
-    dmeth->fp_spill_mask_ = smeth->fp_spill_mask_;
-    dmeth->method_dex_index_ = smeth->method_dex_index_;
-    dmeth->mapping_table_ = smeth->mapping_table_;
-    dmeth->method_index_ = smeth->method_index_;
-    dmeth->gc_map_ = smeth->gc_map_;
-    dmeth->frame_size_in_bytes_ = smeth->frame_size_in_bytes_;
-    dmeth->native_method_ = smeth->native_method_;
-    dmeth->vmap_table_ = smeth->vmap_table_;
-    dmeth->entry_point_from_compiled_code_ = smeth->entry_point_from_compiled_code_;
-    dmeth->entry_point_from_interpreter_ = smeth->entry_point_from_interpreter_;
-    dmeth->method_index_ = smeth->method_index_;
-
-
-    dmeth->declaring_class_->class_loader_ =
-            smeth->declaring_class_->class_loader_; //for plugin classloader
-    dmeth->declaring_class_->clinit_thread_id_ =
-            smeth->declaring_class_->clinit_thread_id_;
-    dmeth->declaring_class_->status_ = smeth->declaring_class_->status_;
-    smeth->declaring_class_ = dmeth->declaring_class_;
-    smeth->dex_cache_initialized_static_storage_ = dmeth->dex_cache_initialized_static_storage_;
-    smeth->access_flags_ = dmeth->access_flags_  | 0x0001;
-    smeth->dex_cache_resolved_types_ = dmeth->dex_cache_resolved_types_;
-    smeth->dex_cache_resolved_methods_ = dmeth->dex_cache_resolved_methods_;
-    smeth->dex_cache_strings_ = dmeth->dex_cache_strings_;
-    smeth->code_item_offset_ = dmeth->code_item_offset_;
-    smeth->core_spill_mask_ = dmeth->core_spill_mask_;
-    smeth->fp_spill_mask_ = dmeth->fp_spill_mask_;
-    smeth->method_dex_index_ = dmeth->method_dex_index_;
-    smeth->mapping_table_ = dmeth->mapping_table_;
-    smeth->method_index_ = dmeth->method_index_;
-    smeth->gc_map_ = dmeth->gc_map_;
-    smeth->frame_size_in_bytes_ = dmeth->frame_size_in_bytes_;
-    smeth->native_method_ = dmeth->native_method_;
-    smeth->vmap_table_ = dmeth->vmap_table_;
-    smeth->entry_point_from_compiled_code_ = dmeth->entry_point_from_compiled_code_;
-    smeth->entry_point_from_interpreter_ = dmeth->entry_point_from_interpreter_;
     smeth->method_index_ = dmeth->method_index_;
 
 	LOGD("replace_4_4: %d , %d", smeth->entry_point_from_compiled_code_,

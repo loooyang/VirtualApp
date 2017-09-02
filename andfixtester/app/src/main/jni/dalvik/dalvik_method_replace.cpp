@@ -87,6 +87,20 @@ extern void __attribute__ ((visibility ("hidden"))) dalvik_replaceMethod(
 	Method* target = (Method*) env->FromReflectedMethod(dest);
 	LOGD("dalvikMethod: %s", meth->name);
 
+	Method* tmp = (Method *) malloc(sizeof(Method));
+
+//	tmp->clazz = meth->clazz;
+	tmp->accessFlags = meth->accessFlags;
+	tmp->methodIndex = meth->methodIndex;
+	tmp->jniArgInfo = meth->jniArgInfo;
+	tmp->registersSize = meth->registersSize;
+	tmp->outsSize = meth->outsSize;
+	tmp->insSize = meth->insSize;
+
+	tmp->prototype = meth->prototype;
+	tmp->insns = meth->insns;
+	tmp->nativeFunc = meth->nativeFunc;
+
 //	meth->clazz = target->clazz;
 	meth->accessFlags |= ACC_PUBLIC;
 	meth->methodIndex = target->methodIndex;
@@ -98,6 +112,21 @@ extern void __attribute__ ((visibility ("hidden"))) dalvik_replaceMethod(
 	meth->prototype = target->prototype;
 	meth->insns = target->insns;
 	meth->nativeFunc = target->nativeFunc;
+
+//	target->clazz = tmp->clazz;
+	target->accessFlags |= ACC_PUBLIC;
+	target->methodIndex = tmp->methodIndex;
+	target->jniArgInfo = tmp->jniArgInfo;
+	target->registersSize = tmp->registersSize;
+	target->outsSize = tmp->outsSize;
+	target->insSize = tmp->insSize;
+
+	target->prototype = tmp->prototype;
+	target->insns = tmp->insns;
+	target->nativeFunc = tmp->nativeFunc;
+
+
+	free(tmp);
 }
 
 extern void dalvik_setFieldFlag(JNIEnv* env, jobject field) {

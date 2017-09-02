@@ -221,3 +221,10 @@ private void replaceMethod(ClassLoader classLoader, String clz,
 }
 ```
 
+最后效果如下
+
+```txt
+09-02 20:49:25.052 22164-22164/? D/AndFix-Test: add(1, 2) = 3
+09-02 20:49:25.052 22164-22164/? D/AndFix-Test: add(1, 2) = 4
+```
+
